@@ -9,8 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Hardcoded login credentials
-const USERNAME = "myid";
-const PASSWORD = "mypassword";
+const USERNAME = "chuntumiya";
+const PASSWORD = "erin1329Gomes";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
