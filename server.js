@@ -7,10 +7,12 @@ const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+require('dotenv').config();
 
-// Hardcoded login credentials
-const USERNAME = "chuntumiya";
-const PASSWORD = "erin1329Gomes";
+// Access the variables using process.env
+const USERNAME = process.env.USERNAME;
+const PASSWORD = process.env.PASSWORD;
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -23,15 +25,18 @@ app.use(session({
 app.use(express.static(path.join(__dirname, "public")));
 
 // Login route
-app.post("/login", (req, res) => {
+app.post('/login', (req, res) => {
   const { username, password } = req.body;
   if (username === USERNAME && password === PASSWORD) {
+    // Authentication successful
     req.session.loggedIn = true;
-    res.redirect("/files");
+    res.redirect('/files');
   } else {
+    // Authentication failed
     res.send("<h2>Login failed. <a href='/'>Try again</a></h2>");
   }
 });
+
 
 // File list page
 app.get("/files", (req, res) => {
